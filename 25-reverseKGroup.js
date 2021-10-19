@@ -17,7 +17,37 @@ function ListNode(val, next) {
  * @return {ListNode}
  */
 var reverseKGroup = function (head, k) {
-  
+  const reverse = (head) => {
+    let pre = null;
+    let curr = head;
+    while (curr != null) {
+      let next = curr.next;
+      curr.next = pre;
+      pre = curr;
+      curr = next;
+    }
+    return pre;
+  }
+
+  let dummy = new ListNode(0);
+  dummy.next = head;
+
+  let pre = dummy;
+  let end = dummy;
+
+  while (end.next != null) {
+    for (let i = 0; i < k && end != null; i++) end = end.next;
+    if (end == null) break;
+    let start = pre.next;
+    let next = end.next;
+    end.next = null;
+    pre.next = reverse(start);
+    start.next = next;
+    pre = start;
+
+    end = pre;
+  }
+  return dummy.next;
 };
 
 const head = {
@@ -36,5 +66,5 @@ const head = {
     }
   }
 };
-const k = 2;
+const k = 3;
 console.log(reverseKGroup(head, k));
