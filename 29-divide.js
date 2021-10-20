@@ -16,7 +16,33 @@
  * @return {number}
  */
 var divide = function (dividend, divisor) {
+  let sign = true;
+  if (dividend < 0) {
+    dividend = -dividend;
+    sign = !sign;
+  }
+  if (divisor < 0) {
+    divisor = -divisor;
+    sign = !sign;
+  }
 
+  let res = 0;
+  while (divisor <= dividend) {
+    let count = 1;
+    let tempDivisor = divisor;
+    while (tempDivisor <= dividend) {
+      dividend -= tempDivisor;
+      res += count;
+      count *= 2;
+      tempDivisor *= 2;
+    }
+  }
+
+  const minValue = -Math.pow(2, 31);
+  const maxValue = Math.pow(2, 31) - 1;
+
+  if (sign) return Math.min(maxValue, res);
+  else return Math.max(minValue, -res);
 };
 const dividend = 10,
   divisor = 3
