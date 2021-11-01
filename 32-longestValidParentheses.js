@@ -8,7 +8,7 @@
  * @return {number}
  */
 var longestValidParentheses = function (s) {
-
+  
 };
 const s = ")()())";
 console.log(longestValidParentheses(s));
